@@ -7,6 +7,7 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import ButtonPrimary from './components/ButtonPrimary';
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import { useNavigate, useParams, useResolvedPath } from 'react-router-dom';
 
 function App() {
   const [username, setUsername] = useState('');
@@ -15,7 +16,6 @@ function App() {
   const [error, setError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [status, setStatus] = useState('');
-  const [token, setToken] = useState('');
   const [passwordFocus, setPasswordFocus] = useState(false);
   const [usernameFocus, setUsernameFocus] = useState(false);
   const checkInputFields = () => {
@@ -28,7 +28,7 @@ function App() {
   const getData = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
+      const response = await axios.get(
         `${import.meta.env.VITE_API}/report/endpoint/get-insiden-v2`,
         {
           columnFilters: {},
@@ -79,7 +79,6 @@ function App() {
       console.log('response', response);
       if (response?.data.msgType !== 'error') {
         console.log('response', response);
-        setStatus(true);
       }
     } catch (error) {
       console.log(error);
@@ -92,6 +91,7 @@ function App() {
         <div className="w-full relative">
           {status ? (
             <form>
+              <input type="text" />
               <ButtonPrimary text="Dapatkan Data" click={getData} />
             </form>
           ) : (
