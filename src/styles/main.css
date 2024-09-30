@@ -1,3 +1,7 @@
 .input-primary {
   @apply w-full px-4 py-4 max-h-12 mb-1 border rounded-xl focus:outline-none;
 }
+body {
+  @apply dark:bg-[#111827];
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
