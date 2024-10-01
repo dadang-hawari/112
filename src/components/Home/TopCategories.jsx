@@ -11,7 +11,7 @@ export const TopCategories = () => {
       </h2>
       <BarList
         className="mt-5"
-        data={dataReport.map((dataCategories) => {
+        data={dataReport?.map((dataCategories) => {
           return { name: dataCategories.name, value: dataCategories.total };
         })}
         color="green"
