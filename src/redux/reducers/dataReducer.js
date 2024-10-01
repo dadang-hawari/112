@@ -5,6 +5,7 @@ const initialState = {
   total: null,
   last_page: null,
   data_today: null,
+  top_categories: null,
 };
 
 const data = createSlice({
@@ -23,8 +24,17 @@ const data = createSlice({
     setLastPage: (state, action) => {
       state.last_page = action.payload;
     },
+    setTopCategories: (state, action) => {
+      state.top_categories = action.payload;
+    },
   },
 });
 
-export const { setData, setTotal, setLastPage, setDataToday } = data.actions;
+export const {
+  setData,
+  setTotal,
+  setLastPage,
+  setDataToday,
+  setTopCategories,
+} = data.actions;
 export default data.reducer;

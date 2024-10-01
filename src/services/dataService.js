@@ -4,6 +4,7 @@ import {
   setData,
   setDataToday,
   setLastPage,
+  setTopCategories,
   setTotal,
 } from '../redux/reducers/dataReducer';
 
@@ -44,6 +45,26 @@ export const getData = async (dispatch) => {
     });
     console.log('error', error);
   }
+};
+export const getTopCategories = async (dispatch) => {
+  try {
+    const response = await axios.get(
+      `${import.meta.env.VITE_API}/get-top-categories`,
+      {
+        withCredentials: true,
+      },
+    );
+    console.log('response', response);
+    if (response.data.message !== 'Unauthenticated.') {
+      dispatch(setTopCategories(response?.data?.data));
+    } else {
+      toast.dismiss('toastWait');
+      toast(response.data.message, {
+        toastId: 'toastError',
+        className: 'toast-error',
+      });
+    }
+  } catch (error) {}
 };
 export const getDataToday = async (dispatch) => {
   try {

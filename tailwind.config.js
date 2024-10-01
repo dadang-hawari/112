@@ -15,6 +15,10 @@ export default {
     extend: {
       colors: {
         // light mode
+        'cst-red': '#EF4444',
+        'cst-green': '#22C55E',
+        'cst-blue': '#3B82F6',
+        'cst-yellow': '#EAB308',
         tremor: {
           brand: {
             faint: colors.blue[50],
