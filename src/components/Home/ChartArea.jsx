@@ -17,7 +17,7 @@ export const ChartArea = () => {
         <h2 className="flex font-semibold w-full justify-between gap-x-5 text-tremor-default text-tremor-content dark:text-dark-tremor-content">
           {`Distribusi Laporan Perbulan ${dateFormatter(Date.now())}`}
         </h2>
-        <div className="text-left w-full text-tremor-content text-sm">
+        <div className="text-right w-full text-tremor-content text-sm">
           <p className="font-bold">Data terakhir diupdate tanggal</p>
           <p>{dateFormatter(Date.now())}</p>
         </div>
