@@ -2,8 +2,10 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import {
   setData,
+  setDataMonth,
   setDataToday,
   setLastPage,
+  setTopArea,
   setTopCategories,
   setTotal,
 } from '../redux/reducers/dataReducer';
@@ -66,6 +68,26 @@ export const getTopCategories = async (dispatch) => {
     }
   } catch (error) {}
 };
+export const getTopArea = async (dispatch) => {
+  try {
+    const response = await axios.get(
+      `${import.meta.env.VITE_API}/get-top-area`,
+      {
+        withCredentials: true,
+      },
+    );
+    console.log('response', response);
+    if (response.data.message !== 'Unauthenticated.') {
+      dispatch(setTopArea(response?.data?.data));
+    } else {
+      toast.dismiss('toastWait');
+      toast(response.data.message, {
+        toastId: 'toastError',
+        className: 'toast-error',
+      });
+    }
+  } catch (error) {}
+};
 export const getDataToday = async (dispatch) => {
   try {
     const response = await axios.get(
@@ -77,6 +99,28 @@ export const getDataToday = async (dispatch) => {
     if (response.data.message !== 'Unauthenticated.') {
       dispatch(setDataToday(response?.data?.data));
       // dispatch(setDataToday(response?.data?));
+    } else {
+      toast.dismiss('toastWait');
+      toast(response.data.message, {
+        toastId: 'toastError',
+        className: 'toast-error',
+      });
+    }
+  } catch (error) {}
+};
+export const getDataMonth = async (dispatch) => {
+  try {
+    const response = await axios.get(
+      `${import.meta.env.VITE_API}/get-insiden-v2-month`,
+      {
+        withCredentials: true,
+      },
+    );
+    if (response.data.message !== 'Unauthenticated.') {
+      dispatch(setDataMonth(response?.data));
+      // dispatch(setDataToday(response?.data?));
+      console.log('mont', response.data.data);
+      console.log('mont31', response.data);
     } else {
       toast.dismiss('toastWait');
       toast(response.data.message, {

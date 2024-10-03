@@ -2,17 +2,21 @@ import React, { useState, useEffect } from 'react';
 import ButtonPrimary from '../components/Common/ButtonPrimary';
 import {
   getData,
+  getDataMonth,
   getDataToday,
   getTopCategories,
 } from '../services/dataService';
 import { useDispatch, useSelector } from 'react-redux';
 import { dateFormatter } from '../utils/dateFormatter';
-import { Card, DonutChart, BarList } from '@tremor/react';
+import { Card, DonutChart, BarList, AreaChart } from '@tremor/react';
 import { blue } from 'tailwindcss/colors';
 import { LoadingSpinner } from '../components/Common/LoadingSpinner';
 import { ChartDonut } from '../components/Home/ChartDonut';
 import { ChartBar } from '../components/Home/ChartBar';
 import { TopCategories } from '../components/Home/TopCategories';
+import Navbar from '../components/Common/Navbar';
+import { TopArea } from '../components/Home/TopArea';
+import { ChartArea } from '../components/Home/ChartArea';
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -94,21 +98,33 @@ export default function Home() {
       setIsLoading(false);
     });
     getTopCategories(dispatch);
+    getDataMonth(dispatch);
   }, []);
 
   return (
-    <div className="px-4 max-w-6xl w-full mx-auto">
-      <div className="flex flex-col md:flex-row gap-4 mt-4 mb-5">
-        <Card className="w-full md:w-2/3 relative ">
-          <span className="text-tremor-default text-tremor-content dark:text-dark-tremor-content">
-            {'Distribusi Tipe Laporan'}
-          </span>
-          <LoadingSpinner isLoading={isLoading} />
-          <ChartDonut isLoading={isLoading} dataChartDonut={dataChartDonut} />
-        </Card>
-        <ChartBar dataChartBar={dataChartBar} />
+    <>
+      <Navbar />
+      <div className="px-4 pt-24 max-w-6xl w-full mx-auto">
+        <ChartArea />
+        <div className="flex flex-col md:flex-row gap-4 mt-4 mb-5">
+          <Card className="w-full md:w-1/2 relative ">
+            <h2 className="flex font-semibold w-full justify-between gap-x-5 text-tremor-default text-tremor-content dark:text-dark-tremor-content">
+              Distribusi Tipe Laporan Hari Ini
+            </h2>
+            <div className="text-right text-tremor-content text-sm">
+              <p className="font-bold">Terakhir diupdate tanggal</p>
+              <p>{dateFormatter(Date.now())}</p>
+            </div>
+            <LoadingSpinner isLoading={isLoading} />
+            <ChartDonut isLoading={isLoading} dataChartDonut={dataChartDonut} />
+          </Card>
+          <ChartBar dataChartBar={dataChartBar} />
+        </div>
+        <div className="flex gap-5">
+          <TopCategories />
+          <TopArea />
+        </div>
       </div>
-      <TopCategories />
-    </div>
+    </>
   );
 }
