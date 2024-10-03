@@ -23,6 +23,9 @@ export const userLogin = async (
       });
       return;
     }
+    toast.loading('Mohon tunggu sebentar...', {
+      toastId: 'toastWait',
+    });
 
     const response = await axios.post(
       `${import.meta.env.VITE_API}/login`,
@@ -36,17 +39,26 @@ export const userLogin = async (
         withCredentials: true, // Pastikan credentials disertakan
       },
     );
+    console.log('response', response);
 
-    if (response?.status === 200) {
+    if (response?.data?.msgType === 'success') {
       console.log('Login success:', response);
+      toast.dismiss('toastWait');
       dispatch(setData(response.data));
       toast('Berhasil Masuk ke Dashboard', {
         toastId: 'toastSuccess',
         className: 'toast-success',
       });
       navigate('/');
+    } else {
+      toast.dismiss('toastWait');
+      toast(response.data.msg, {
+        toastId: 'toastError',
+        className: 'toast-error',
+      });
     }
   } catch (error) {
+    toast.dismiss('toastWait');
     console.error('Login error:', error);
   }
 };

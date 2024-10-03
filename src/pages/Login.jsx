@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import ButtonPrimary from '../components/ButtonPrimary';
+import ButtonPrimary from '../components/Common/ButtonPrimary';
 import { userLogin } from '../services/authService';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -26,9 +26,9 @@ function App() {
   };
 
   return (
-    <div className="w-full md:flex h-screen justify-center px-4">
-      <div className="flex w-full max-w-lg h-ful mx-auto mt-20 items-center border justify-center max-h-80 rounded-md h-full my-auto px-5 ">
-        <div className="w-full relative">
+    <div className="w-full md:flex h-screen bg-white dark:bg-[#111827] justify-center px-4">
+      <div className="flex w-full max-w-lg  mx-auto bg-inherit mt-20 items-center border justify-center max-h-[400px] rounded-md h-full my-auto px-5 ">
+        <div className="w-full relative bg-inherit">
           <img
             src="/images/logo.png"
             alt="Logo Kota Makassar & KOMINFO Makassar"
@@ -36,12 +36,12 @@ function App() {
             width="504"
             height="250"
           />
-          <form>
-            <div className="mt-2 relative pt-1">
+          <form className="bg-white dark:bg-[#111827] ">
+            <div className="mt-2 relative pt-1 bg-white dark:bg-[#111827]">
               <label
                 htmlFor="username"
-                className={`text-sm text-gray-500 px-2 pointer-events-none bg-white transition-all absolute z-30 left-2 top-1/2 -translate-y-1/2 ${
-                  usernameFocus ? 'top-[3%] text-xs' : 'top-1/2'
+                className={`text-sm text-tremor-content bg-inherit px-2 pointer-events-none  transition-all absolute z-30 left-2 top-1/2 -translate-y-1/2 ${
+                  usernameFocus ? 'top-[3%] text-xs ' : 'top-1/2'
                 }`}
               >
                 Masukkan username
@@ -49,7 +49,7 @@ function App() {
               <input
                 id="username"
                 type="text"
-                className={`w-full input-primary  outline-none focus:border-blue-500`}
+                className={`w-full input-primary text-tremor-content outline-none bg-inherit focus:border-blue-500`}
                 value={username}
                 autoComplete="off"
                 onChange={(e) => setUsername(e.target.value)}
@@ -62,11 +62,11 @@ function App() {
               />
               {error && <div className="text-red-500 text-xs">{error}</div>}
             </div>
-            <div className="my-4 relative ">
-              <div className="relative pt-1">
+            <div className="my-4 relative  bg-white dark:bg-[#111827]">
+              <div className="relative pt-1  dark:bg-[#111827]">
                 <label
                   htmlFor="password"
-                  className={`text-sm text-gray-500 px-2 pointer-events-none bg-white transition-all absolute z-30 left-2 top-1/2 -translate-y-1/2 ${
+                  className={`text-sm dark:bg-[#111827] bg-white  text-tremor-content px-2 pointer-events-none transition-all absolute z-30 left-2 top-1/2 -translate-y-1/2 ${
                     passwordFocus ? 'top-[3%] text-xs' : 'top-1/2'
                   }`}
                 >
@@ -75,7 +75,7 @@ function App() {
                 <input
                   id="password"
                   type={showPassword ? 'text' : 'password'}
-                  className={`w-full input-primary outline-none before:content-['Hello\_World'] before:block ${
+                  className={`w-full bg-white input-primary text-tremor-content dark:bg-[#111827] outline-none before:content-['Hello\_World'] before:block ${
                     passwordError ? 'border-red-500' : 'focus:border-blue-500'
                   }`}
                   onFocus={() => setPasswordFocus(true)}
