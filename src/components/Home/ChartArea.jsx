@@ -13,7 +13,7 @@ export const ChartArea = () => {
   }, []);
   return (
     <Card className="w-full max-w-7xl mx-auto">
-      <div className="w-full flex flex-col sm:flex-row justify-between">
+      <div className="w-full flex justify-between">
         <h2 className="flex font-semibold w-full justify-between gap-x-5 text-tremor-default text-tremor-content dark:text-dark-tremor-content">
           {`Distribusi Laporan Perbulan ${dateFormatter(Date.now())}`}
         </h2>
