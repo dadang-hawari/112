@@ -18,6 +18,11 @@ export default function Navbar() {
     };
   }, []);
   useEffect(() => {
+    showMenu
+      ? (document.querySelector('body').style.overflowY = 'hidden')
+      : (document.querySelector('body').style.overflowY = 'scroll');
+  }, [showMenu]);
+  useEffect(() => {
     window.addEventListener('resize', handleResize);
     return () => {
       window.removeEventListener('resize', handleResize);
@@ -34,8 +39,8 @@ export default function Navbar() {
 
   return (
     <header
-      className={`bg-transparent fixed z-50 ${
-        showMenu ? 'h-full top-10 backdrop-blur-sm shadow-md' : ''
+      className={`bg-transparent fixed z-50 top-0 ${
+        showMenu ? 'h-full backdrop-blur-sm shadow-md' : ''
       }  text-white transition-all duration-300 w-full ${
         scrollValue > 50 && 'backdrop-blur-sm shadow-md'
       } `}
