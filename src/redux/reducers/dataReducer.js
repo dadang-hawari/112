@@ -8,6 +8,7 @@ const initialState = {
   data_month: null,
   top_categories: null,
   top_area: null,
+  summary_call: null,
 };
 
 const data = createSlice({
@@ -35,6 +36,9 @@ const data = createSlice({
     setTopArea: (state, action) => {
       state.top_area = action.payload;
     },
+    setSummaryCall: (state, action) => {
+      state.summary_call = action.payload;
+    },
   },
 });
 
@@ -46,5 +50,6 @@ export const {
   setTopCategories,
   setTopArea,
   setDataMonth,
+  setSummaryCall,
 } = data.actions;
 export default data.reducer;
