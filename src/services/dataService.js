@@ -6,6 +6,7 @@ import {
   setDataToday,
   setLastPage,
   setSummaryCall,
+  setSummaryInsiden,
   setTopArea,
   setTopCategories,
   setTotal,
@@ -120,6 +121,25 @@ export const getSummaryCall = async (dispatch) => {
     if (response.data.message !== 'Unauthenticated.') {
       dispatch(setSummaryCall(response?.data));
       console.log('summary-call', response.data.data);
+    } else {
+      toast.dismiss('toastWait');
+      toast(response.data.message, {
+        toastId: 'toastError',
+        className: 'toast-error',
+      });
+    }
+  } catch (error) {}
+};
+export const getSummaryInsiden = async (dispatch) => {
+  try {
+    const response = await axios.get(
+      `${import.meta.env.VITE_API}/get-summary-insiden`,
+      {
+        withCredentials: true,
+      },
+    );
+    if (response.data.message !== 'Unauthenticated.') {
+      dispatch(setSummaryInsiden(response?.data?.data));
     } else {
       toast.dismiss('toastWait');
       toast(response.data.message, {

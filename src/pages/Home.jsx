@@ -5,6 +5,7 @@ import {
   getDataMonth,
   getDataToday,
   getSummaryCall,
+  getSummaryInsiden,
   getTopCategories,
 } from '../services/dataService';
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,6 +18,7 @@ import { TopCategories } from '../components/Home/TopCategories';
 import Navbar from '../components/Common/Navbar';
 import { TopArea } from '../components/Home/TopArea';
 import { ChartArea } from '../components/Home/ChartArea';
+import { TotalInsiden } from '../components/Home/TotalInsiden';
 import { ChartProgressCircle } from '../components/Home/ChartProgressCircle';
 
 export default function Home() {
@@ -100,14 +102,18 @@ export default function Home() {
     });
     getTopCategories(dispatch);
     getDataMonth(dispatch);
+    getSummaryInsiden(dispatch);
   }, []);
 
   return (
     <>
       <Navbar />
-      <div className="px-4 pt-24 max-w-6xl w-full mx-auto">
+      <div className="px-4 pt-24 max-w-6xl h-screen w-full mx-auto">
         <ChartArea />
-        <ChartProgressCircle />
+        <div className="flex flex-col md:flex-row gap-4">
+          <ChartProgressCircle />
+          <TotalInsiden />
+        </div>
         <div className="flex flex-col md:flex-row gap-4 mt-4 mb-5">
           <Card className="w-full md:w-1/2 relative ">
             <h2 className="flex font-semibold w-full justify-between gap-x-5 text-tremor-default text-tremor-content dark:text-dark-tremor-content">
