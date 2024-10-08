@@ -4,12 +4,12 @@ import {
   getData,
   getDataMonth,
   getDataToday,
+  getSummaryCall,
   getTopCategories,
 } from '../services/dataService';
 import { useDispatch, useSelector } from 'react-redux';
 import { dateFormatter } from '../utils/dateFormatter';
 import { Card, DonutChart, BarList, AreaChart } from '@tremor/react';
-import { blue } from 'tailwindcss/colors';
 import { LoadingSpinner } from '../components/Common/LoadingSpinner';
 import { ChartDonut } from '../components/Home/ChartDonut';
 import { ChartBar } from '../components/Home/ChartBar';
@@ -17,6 +17,7 @@ import { TopCategories } from '../components/Home/TopCategories';
 import Navbar from '../components/Common/Navbar';
 import { TopArea } from '../components/Home/TopArea';
 import { ChartArea } from '../components/Home/ChartArea';
+import { ChartProgressCircle } from '../components/Home/ChartProgressCircle';
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -106,6 +107,7 @@ export default function Home() {
       <Navbar />
       <div className="px-4 pt-24 max-w-6xl w-full mx-auto">
         <ChartArea />
+        <ChartProgressCircle />
         <div className="flex flex-col md:flex-row gap-4 mt-4 mb-5">
           <Card className="w-full md:w-1/2 relative ">
             <h2 className="flex font-semibold w-full justify-between gap-x-5 text-tremor-default text-tremor-content dark:text-dark-tremor-content">

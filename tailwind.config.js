@@ -19,6 +19,7 @@ export default {
         'cst-green': '#22C55E',
         'cst-blue': '#3B82F6',
         'cst-yellow': '#EAB308',
+        'cst-orange': '#F97316',
         tremor: {
           brand: {
             faint: colors.blue[50],
