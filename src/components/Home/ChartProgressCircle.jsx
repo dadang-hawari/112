@@ -36,7 +36,7 @@ export const ChartProgressCircle = () => {
     <Card className="mt-4 md:w-1/2">
       <div className="flex justify-between text-tremor-content">
         <div className="w-full">
-          <h2 className="flex items-center gap-x-2">
+          <h2 className="flex items-center gap-x-2 font-semibold">
             <FontAwesomeIcon icon={faPhone} />
             Total Panggilan Masuk
           </h2>

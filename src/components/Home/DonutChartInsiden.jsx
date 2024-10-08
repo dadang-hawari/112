@@ -1,20 +1,22 @@
 import { DonutChart } from '@tremor/react';
 import { useSelector } from 'react-redux';
 
-export const DonutChart1 = () => {
+export const DonutChartInsiden = () => {
   const dataReport = useSelector(
-    (state) => state?.data_report?.summary_call?.data,
+    (state) => state?.data_report?.summary_insiden,
   );
-  const sla = dataReport?.kpi_call;
-  const slaMinus = 100 - sla;
+
+  const serviceLevel = dataReport?.service_level;
+
+  const slaMinus = 100 - serviceLevel;
   const chartdata = [
     {
-      name: 'Tidak Terjawab',
+      name: 'Diproses',
       amount: slaMinus,
     },
     {
-      name: 'Terjawab',
-      amount: sla,
+      name: 'Selesai',
+      amount: serviceLevel,
     },
   ];
 
@@ -26,7 +28,7 @@ export const DonutChart1 = () => {
         index="name"
         category="amount"
         colors={['red', 'blue']}
-        label={`${sla}%`}
+        label={`${serviceLevel}%`}
         valueFormatter={(value) => `${value.toFixed(2)}%`}
       />
     </>
