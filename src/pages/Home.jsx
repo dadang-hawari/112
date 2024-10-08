@@ -128,7 +128,7 @@ export default function Home() {
           </Card>
           <ChartBar dataChartBar={dataChartBar} />
         </div>
-        <div className="flex flex-col sm:flex-row gap-5">
+        <div className="flex gap-5">
           <TopCategories />
           <TopArea />
         </div>

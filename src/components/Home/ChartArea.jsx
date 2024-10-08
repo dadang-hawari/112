@@ -13,7 +13,7 @@ export const ChartArea = () => {
     getDataMonth(dispatch).then(() => setIsLoading(false));
   }, []);
   return (
-    <Card className="w-full max-w-7xl h-[416px] overflow-x-scroll mx-auto relative">
+    <Card className="w-full max-w-7xl h-[416px] mx-auto relative">
       {isLoading ? (
         <LoadingSpinner isLoading={isLoading} />
       ) : (
@@ -24,7 +24,7 @@ export const ChartArea = () => {
         >
           <div className="w-full flex justify-between">
             <h2 className="flex font-semibold w-full justify-between gap-x-5 text-tremor-default text-tremor-content dark:text-dark-tremor-content">
-              {`Distribusi Laporan Perbulan`}
+              {`Distribusi Laporan Perbulan ${dateFormatter(Date.now())}`}
             </h2>
             <div className="text-right w-full text-tremor-content text-sm">
               <p className="font-bold">Data terakhir diupdate tanggal</p>
@@ -32,7 +32,7 @@ export const ChartArea = () => {
             </div>
           </div>
           <AreaChart
-            className="mt-2 h-80 overflow-auto"
+            className="mt-2 h-80"
             data={dataReport}
             index="date"
             categories={['information', 'normal', 'ghost', 'prank']}
