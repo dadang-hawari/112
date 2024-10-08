@@ -1,16 +1,15 @@
 import { AreaChart, Card } from '@tremor/react';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getDataMonth } from '../../services/dataService';
 import { dateFormatter } from '../../utils/dateFormatter';
-import { LoadingSpinner } from '../Common/LoadingSpinner';
 
 export const ChartArea = () => {
   const dataReport = useSelector((state) => state?.data_report?.data_month);
   const dispatch = useDispatch();
-  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
-    getDataMonth(dispatch).then(() => setIsLoading(false));
+    getDataMonth(dispatch);
   }, []);
   return (
     <Card className="w-full max-w-7xl h-[416px] overflow-x-scroll mx-auto relative">
@@ -40,7 +39,15 @@ export const ChartArea = () => {
             yAxisWidth={34}
           />
         </div>
-      )}
+      </div>
+      <AreaChart
+        className="mt-2 h-80"
+        data={dataReport}
+        index="date"
+        categories={['information', 'normal', 'ghost', 'prank']}
+        colors={['blue', 'green', 'yellow', 'red']}
+        yAxisWidth={30}
+      />
     </Card>
   );
 };

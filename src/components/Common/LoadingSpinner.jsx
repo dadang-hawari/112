@@ -8,7 +8,7 @@ export const LoadingSpinner = ({ isLoading }) => {
       <div className="flex justify-center  items-center mb-4">
         <div className="animate-spin rounded-full w-28 h-28 border-t-4 border-blue-500 border-opacity-75"></div>
       </div>
-      <h3 className="text-lg font-semibold text-center text-gray-700 animate-pulse">
+      <h3 className="text-lg font-semibold text-gray-700 animate-pulse">
         Sedang mengambil data...
       </h3>
     </div>
