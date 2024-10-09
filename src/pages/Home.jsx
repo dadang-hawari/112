@@ -100,9 +100,6 @@ export default function Home() {
     getDataToday(dispatch).then(() => {
       setIsLoading(false);
     });
-    getTopCategories(dispatch);
-    getDataMonth(dispatch);
-    getSummaryInsiden(dispatch);
   }, []);
 
   return (
@@ -110,7 +107,7 @@ export default function Home() {
       <Navbar />
       <div className="px-4 pt-24 max-w-6xl h-screen w-full mx-auto">
         <ChartArea />
-        <div className="flex flex-col md:flex-row gap-4">
+        <div className="flex flex-col md:flex-row gap-4 w-full">
           <ChartProgressCircle />
           <TotalInsiden />
         </div>
