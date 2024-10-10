@@ -35,7 +35,7 @@ export default function Navbar() {
   return (
     <header
       className={`bg-transparent fixed z-50 ${
-        showMenu ? 'h-full top-10 backdrop-blur-sm shadow-md' : ''
+        showMenu ? 'h-full backdrop-blur-sm shadow-md' : ''
       }  text-white transition-all duration-300 w-full ${
         scrollValue > 50 && 'backdrop-blur-sm shadow-md'
       } `}

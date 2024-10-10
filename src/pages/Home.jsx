@@ -20,6 +20,7 @@ import { TopArea } from '../components/Home/TopArea';
 import { ChartArea } from '../components/Home/ChartArea';
 import { TotalInsiden } from '../components/Home/TotalInsiden';
 import { ChartProgressCircle } from '../components/Home/ChartProgressCircle';
+import Report from './Report';
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -130,6 +131,7 @@ export default function Home() {
           <TopArea />
         </div>
       </div>
+      <Report />
     </>
   );
 }
