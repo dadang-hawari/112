@@ -20,6 +20,7 @@ import { TopArea } from '../components/Home/TopArea';
 import { ChartArea } from '../components/Home/ChartArea';
 import { TotalInsiden } from '../components/Home/TotalInsiden';
 import { ChartProgressCircle } from '../components/Home/ChartProgressCircle';
+import Report from './Report';
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -100,9 +101,6 @@ export default function Home() {
     getDataToday(dispatch).then(() => {
       setIsLoading(false);
     });
-    getTopCategories(dispatch);
-    getDataMonth(dispatch);
-    getSummaryInsiden(dispatch);
   }, []);
 
   return (
@@ -110,7 +108,7 @@ export default function Home() {
       <Navbar />
       <div className="px-4 pt-24 max-w-6xl h-screen w-full mx-auto">
         <ChartArea />
-        <div className="flex flex-col md:flex-row gap-4">
+        <div className="flex flex-col md:flex-row gap-4 w-full">
           <ChartProgressCircle />
           <TotalInsiden />
         </div>
@@ -133,6 +131,7 @@ export default function Home() {
           <TopArea />
         </div>
       </div>
+      <Report />
     </>
   );
 }
