@@ -5,3 +5,11 @@ body {
   @apply dark:bg-[#111827];
   font-family: 'Plus Jakarta Sans', sans-serif;
 }
+
+select option {
+  all: unset;
+}
+
+div.report label {
+  @apply mb-2 block;
+}

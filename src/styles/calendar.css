@@ -1,0 +1,93 @@
+div.rmdp-wrapper {
+  @apply rounded-xl select-none bg-inherit dark:shadow-none dark:border dark:border-tremor-content;
+}
+div.rmdp-wrapper .rmdp-day.rmdp-today span {
+  @apply bg-secondary;
+}
+div.rmdp-wrapper .rmdp-day.rmdp-today {
+  @apply bg-secondary rounded-sm;
+}
+
+div.rmdp-week div.rmdp-day.rmdp-day-hidden {
+  @apply hover:bg-transparent;
+}
+
+div.rmdp-wrapper .rmdp-day {
+  @apply h-[50px] w-[40.57px];
+}
+div.rmdp-wrapper .rmdp-day:not(.rmdp-range):focus {
+  @apply rounded-sm;
+}
+div.rmdp-wrapper .rmdp-day.rmdp-range {
+  @apply bg-[#b7d5e6aa] dark:bg-white dark:bg-opacity-55 shadow-none text-black;
+}
+div.rmdp-wrapper .rmdp-day span {
+  @apply rounded-sm;
+}
+
+div.rmdp-wrapper .rmdp-day.rmdp-range.start,
+div.rmdp-wrapper .rmdp-day.rmdp-range.end {
+  @apply bg-secondary text-white;
+}
+div.rmdp-wrapper .rmdp-day.rmdp-range.start {
+  @apply rounded-s-md;
+}
+
+div.rmdp-wrapper .rmdp-day.rmdp-selected {
+  @apply bg-secondary rounded-sm;
+}
+div.rmdp-wrapper .rmdp-day.rmdp-selected span:not(.highlight) {
+  @apply shadow-none;
+}
+div.rmdp-wrapper .rmdp-day.rmdp-range.end {
+  @apply rounded-e-md;
+}
+div.rmdp-wrapper .rmdp-week .rmdp-day span:hover {
+  @apply rounded-sm text-white border-none;
+}
+div.rmdp-wrapper .rmdp-week .rmdp-day.rmdp-disabled span:hover {
+  @apply rounded-sm text-[#8798AD] border-none;
+}
+div.rmdp-wrapper div.rmdp-day span:hover {
+  @apply bg-transparent border-none;
+}
+div.rmdp-wrapper .rmdp-day:hover {
+  @apply bg-secondary rounded-sm text-white;
+}
+div.rmdp-wrapper .rmdp-day:active {
+  @apply bg-secondary rounded-sm;
+}
+div.rmdp-wrapper .rmdp-day.rmdp-disabled:hover {
+  @apply bg-white rounded-sm text-[#8798AD];
+}
+
+div.rmdp-day {
+  @apply dark:text-tremor-content;
+}
+
+div.rmdp-wrapper .rmdp-arrow-container.rmdp-left {
+  @apply rounded-full;
+}
+div.rmdp-wrapper button.rmdp-arrow-container.rmdp-left,
+div.rmdp-wrapper button.rmdp-arrow-container.rmdp-right {
+  @apply h-6 w-6 pt-1;
+}
+div.rmdp-wrapper .rmdp-arrow-container.rmdp-right {
+  @apply rounded-full;
+}
+div.rmdp-wrapper button.rmdp-arrow-container.rmdp-right {
+  @apply pt-[2px] ps-[1px];
+}
+
+div.rmdp-wrapper .rmdp-header-values {
+  @apply font-[600] dark:text-tremor-content;
+}
+
+div.calendar,
+div.rmdp-container {
+  @apply w-full;
+}
+
+.rmdp-container input.rmdp-input {
+  @apply w-full block border border-tremor-content rounded-none outline-none focus:border-secondary bg-inherit h-full py-2;
+}

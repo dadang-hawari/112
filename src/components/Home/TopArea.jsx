@@ -16,7 +16,7 @@ export const TopArea = () => {
   );
 
   return (
-    <Card className="relative">
+    <Card className="relative py-10">
       {isLoading ? (
         <LoadingSpinner isLoading={isLoading} />
       ) : (
