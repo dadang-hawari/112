@@ -2,6 +2,7 @@
 import colors from 'tailwindcss/colors';
 
 export default {
+  darkMode: 'class',
   content: [
     './index.html',
     './src/**/*.{js,ts,jsx,tsx}',
@@ -20,6 +21,15 @@ export default {
         'cst-blue': '#3B82F6',
         'cst-yellow': '#EAB308',
         'cst-orange': '#F97316',
+        primary: '#1171c0',
+        secondary: '#1177CB',
+        accent: '#008CFF',
+        'soft-blue': '#B7D5E6',
+        'softer-blue': '#D4E2F0',
+        'gray-primary': '#787676',
+        'gray-secondary': '#3c3c3c',
+        'red-primary': '#EC0909',
+        'green-soft': '#73CA5C',
         tremor: {
           brand: {
             faint: colors.blue[50],

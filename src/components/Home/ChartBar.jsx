@@ -2,7 +2,7 @@ import { BarList, Card } from '@tremor/react';
 
 export const ChartBar = ({ dataChartBar }) => {
   return (
-    <Card className="w-full md:w-1/2 text-tremor-content">
+    <div className="w-full text-tremor-content">
       <h3 className="font-bold">Keterangan</h3>
       <p>
         Berikut merupakan informasi distribusi laporan dari <i>ringchart</i> :
@@ -12,6 +12,6 @@ export const ChartBar = ({ dataChartBar }) => {
         data={dataChartBar}
         valueFormatter={(value) => `${value} Laporan`}
       />
-    </Card>
+    </div>
   );
 };

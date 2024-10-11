@@ -123,15 +123,14 @@ export default function Home() {
             </div>
             <LoadingSpinner isLoading={isLoading} />
             <ChartDonut isLoading={isLoading} dataChartDonut={dataChartDonut} />
+            <ChartBar dataChartBar={dataChartBar} />
           </Card>
-          <ChartBar dataChartBar={dataChartBar} />
-        </div>
-        <div className="flex gap-5">
-          <TopCategories />
-          <TopArea />
+          <div className="w-full md:w-1/2 gap-5 flex flex-col  relative">
+            <TopCategories />
+            <TopArea />
+          </div>
         </div>
       </div>
-      <Report />
     </>
   );
 }

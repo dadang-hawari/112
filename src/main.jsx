@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './styles/index.css';
 import './styles/main.css';
 import './styles/toast.css';
+import './styles/calendar.css';
 import Route from './Routes.jsx';
 import { Provider } from 'react-redux';
 import store from './redux/store.js';

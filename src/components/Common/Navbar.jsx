@@ -25,8 +25,29 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    screenWidth > 640 ? setShowMenu(false) : setShowMenu(true);
+    screenWidth > 640 ? setShowMenu(false) : setShowMenu(false);
   }, [screenWidth]);
+
+  // State untuk theme
+  const [theme, setTheme] = useState(
+    localStorage.getItem('theme') === 'dark' ? 'dark' : 'light',
+  );
+
+  // Fungsi untuk toggle tema
+  const toggleTheme = () => {
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
+  };
+
+  // Mengubah class pada elemen root berdasarkan state theme
+  useEffect(() => {
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [theme]);
 
   useEffect(() => {
     setShowMenu(false);
@@ -44,7 +65,12 @@ export default function Navbar() {
         <div className="logo z-40">
           <img src="../images/logo-mks-kominfo.webp" alt="" />
         </div>
-
+        <button
+          className="py-2 px-4 mb-5 bg-gray-200 dark:bg-gray-800 text-black dark:text-white rounded"
+          onClick={toggleTheme}
+        >
+          {theme === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'}
+        </button>
         <button
           className={`text-xl ${
             path === '/' ? 'text-white' : 'text-gray-800'
@@ -64,21 +90,21 @@ export default function Navbar() {
           <li className="font-bold ">
             <Link
               to="/"
-              className={`${path !== '/' && 'text-black opacity-60'}`}
+              className={`${path !== '/' && 'font-normal opacity-60'}`}
             >
               Beranda
             </Link>
           </li>
           <li className="">
             <Link
-              to="/fungsi"
+              to="/report"
               className={`${
-                path !== '/' && 'text-black font-bold'
+                path !== '/' && ' font-bold'
               } transition-opacity duration-1000   ${
-                path === '/fungsi' ? 'opacity-100' : 'opacity-60'
+                path === '/report' ? 'opacity-100' : 'opacity-60'
               }`}
             >
-              Menu
+              Report
             </Link>
           </li>
         </ul>
