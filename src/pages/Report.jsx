@@ -116,7 +116,7 @@ export default function Report() {
           </div>
         </form>
         <div className="flex flex-col gap-2 mt-5 w-fit">
-          <label htmlFor="show">Jumlah Baris Untuk Ditampilkan</label>
+          <label htmlFor="show">Jumlah Baris Ditampilkan</label>
           <select
             className="dark:bg-tremor-content-strong w-24 cursor-pointer"
             onChange={setValueShow}
