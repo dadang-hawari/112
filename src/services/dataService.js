@@ -2,6 +2,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import {
   setData,
+  setDataInsiden,
   setDataMonth,
   setDataToday,
   setLastPage,
@@ -149,6 +150,35 @@ export const getSummaryInsiden = async (dispatch) => {
     }
   } catch (error) {}
 };
+export const getDataInsiden = async (dispatch, showRow, callType, status) => {
+  try {
+    const response = await axios.get(
+      `${import.meta.env.VITE_API}/get-insiden`,
+      {
+        params: {
+          call_type: callType, // Kirim data sebagai query parameters
+          status,
+          perPage: showRow,
+        },
+        withCredentials: true, // Sertakan opsi ini di konfigurasi yang sama
+      },
+    );
+
+    if (response.data.message !== 'Unauthenticated.') {
+      dispatch(setDataInsiden(response?.data));
+      console.log('response.data', response.data);
+    } else {
+      toast.dismiss('toastWait');
+      toast(response.data.message, {
+        toastId: 'toastError',
+        className: 'toast-error',
+      });
+    }
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+};
+
 export const getDataMonth = async (dispatch) => {
   try {
     const response = await axios.get(

@@ -32,7 +32,7 @@ export const TotalInsiden = () => {
   const closed = dataReport?.closed;
   const total = dataReport?.total;
   return (
-    <Card className="mt-4 md:w-1/2 relative">
+    <Card className="mt-4  md:w-1/2 relative">
       {isLoading ? (
         <LoadingSpinner isLoading={isLoading} />
       ) : (

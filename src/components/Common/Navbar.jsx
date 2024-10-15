@@ -1,10 +1,15 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useParams } from 'react-router-dom';
+import { IconSun } from './Icons/IconSun';
+import { IconMoon } from './Icons/IconMoon';
+
 export default function Navbar() {
   const path = useLocation().pathname;
   const [scrollValue, setScrollValue] = useState(window.scrollY);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [showMenu, setShowMenu] = useState(false);
+
   const handleScroll = () => {
     setScrollValue(window.scrollY);
   };
@@ -57,23 +62,22 @@ export default function Navbar() {
     <header
       className={`bg-transparent fixed z-50 ${
         showMenu ? 'h-full backdrop-blur-sm shadow-md' : ''
-      }  text-white transition-all duration-300 w-full ${
+      }  dark:text-white text-tremor-content transition-all duration-300 w-full ${
         scrollValue > 50 && 'backdrop-blur-sm shadow-md'
       } `}
     >
-      <nav className="flex justify-between  items-center px-5">
+      <nav className="flex justify-between items-center px-5">
         <div className="logo z-40">
-          <img src="../images/logo-mks-kominfo.webp" alt="" />
+          <img
+            src="../images/logo-mks-kominfo.webp"
+            alt="logo kominfo"
+            className="max-h-[68px] h-full"
+          />
         </div>
-        <button
-          className="py-2 px-4 mb-5 bg-gray-200 dark:bg-gray-800 text-black dark:text-white rounded"
-          onClick={toggleTheme}
-        >
-          {theme === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'}
-        </button>
+
         <button
           className={`text-xl ${
-            path === '/' ? 'text-white' : 'text-gray-800'
+            path === '/' ? 'text-tremor-content' : 'text-gray-800'
           }  opacity-60 font-bold sm:hidden z-50`}
           onClick={() => setShowMenu(!showMenu)}
         >
@@ -100,12 +104,17 @@ export default function Navbar() {
               to="/report"
               className={`${
                 path !== '/' && ' font-bold'
-              } transition-opacity duration-1000   ${
+              } transition-opacity duration-400   ${
                 path === '/report' ? 'opacity-100' : 'opacity-60'
               }`}
             >
               Report
             </Link>
+          </li>
+          <li className="">
+            <button className="px-5 " onClick={toggleTheme}>
+              {theme === 'dark' ? <IconSun /> : <IconMoon />}
+            </button>
           </li>
         </ul>
       </nav>
