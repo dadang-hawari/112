@@ -1,5 +1,5 @@
 div.rmdp-wrapper {
-  @apply rounded-xl select-none bg-inherit dark:shadow-none dark:border dark:border-tremor-content;
+  @apply rounded-xl select-none bg-inherit dark:backdrop-blur-sm dark:shadow-none dark:border dark:border-tremor-content;
 }
 div.rmdp-wrapper .rmdp-day.rmdp-today span {
   @apply bg-secondary;
@@ -89,5 +89,5 @@ div.rmdp-container {
 }
 
 .rmdp-container input.rmdp-input {
-  @apply w-full block border border-tremor-content rounded-none outline-none focus:border-secondary bg-inherit h-full py-2;
+  @apply w-full block border border-tremor-content rounded-none outline-none focus:border-secondary bg-inherit text-sm h-full -mt-[0.5px] py-2;
 }

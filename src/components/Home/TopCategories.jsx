@@ -13,7 +13,7 @@ export const TopCategories = () => {
   }, []);
 
   return (
-    <Card className="w-full py-10 relative">
+    <Card className="w-full py-10 h-full relative">
       {isLoading ? (
         <LoadingSpinner isLoading={isLoading} />
       ) : (

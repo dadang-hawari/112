@@ -10,6 +10,7 @@ const initialState = {
   top_area: null,
   summary_call: null,
   summary_insiden: null,
+  data_insiden: null,
 };
 
 const data = createSlice({
@@ -43,6 +44,9 @@ const data = createSlice({
     setSummaryInsiden: (state, action) => {
       state.summary_insiden = action.payload;
     },
+    setDataInsiden: (state, action) => {
+      state.data_insiden = action.payload;
+    },
   },
 });
 
@@ -56,5 +60,6 @@ export const {
   setDataMonth,
   setSummaryCall,
   setSummaryInsiden,
+  setDataInsiden,
 } = data.actions;
 export default data.reducer;

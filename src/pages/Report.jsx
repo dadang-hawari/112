@@ -1,87 +1,64 @@
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Navbar from '../components/Common/Navbar';
 import DatePicker from 'react-multi-date-picker';
-
+import { getData, getDataInsiden } from '../services/dataService';
+import { ReportTable } from '../components/Home/ReporTable';
+const isiData = [{ data_1: 'ok' }];
 export default function Report() {
-  const data = useSelector((state) => state?.data_report);
-  const [callType, setCallType] = useState('');
+  const [callType, setCallType] = useState(1);
+  const [status, setStatus] = useState(0);
+  const [showRow, setShowRow] = useState(10);
+  const dispatch = useDispatch();
   const today = new Date();
   today.setHours(0, 0, 0); // Atur jam ke 00:00 untuk tanggal awal
-
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
   tomorrow.setHours(23, 59, 59); // Atur jam ke 23:59 untuk tanggal akhir
 
+  useEffect(() => {
+    getDataInsiden(dispatch, showRow, callType, status);
+  }, [showRow, callType, status]);
+
   const [values, setValues] = useState([today, tomorrow]);
 
-  // State untuk theme
-  const [theme, setTheme] = useState(
-    localStorage.getItem('theme') === 'dark' ? 'dark' : 'light',
-  );
-
-  // Fungsi untuk toggle tema
-  const toggleTheme = () => {
-    const newTheme = theme === 'light' ? 'dark' : 'light';
-    setTheme(newTheme);
-    localStorage.setItem('theme', newTheme);
+  const setValueShow = (e) => {
+    setShowRow(e.target.value);
+  };
+  const setStatusInsiden = (e) => {
+    setStatus(e.target.value);
   };
 
-  // Mengubah class pada elemen root berdasarkan state theme
   useEffect(() => {
-    if (theme === 'dark') {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [theme]);
-
-  const ReportTable = () => {
-    return (
-      <table className="border mt-10">
-        <thead>
-          <tr>
-            <th className="border">Isi Data</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Datanya</td>
-          </tr>
-        </tbody>
-      </table>
-    );
-  };
+    document
+      ?.getElementById('input-disabled')
+      ?.setAttribute('onkeydown', 'return false;');
+  }, []);
 
   return (
     <>
       <Navbar />
-      <div className="pt-24 text-tremor-content px-5 max-w-5xl w-full mx-auto">
+      <div className="pt-24  text-tremor-content px-5 max-w-5xl w-full mx-auto">
         <h2 className="text-4xl font-semibold mb-5">Laporan Insiden</h2>
-        {/* Tombol Toggle Theme */}
-        <button
-          className="py-2 px-4 mb-5 bg-gray-200 dark:bg-gray-800 text-black dark:text-white rounded"
-          onClick={toggleTheme}
-        >
-          {theme === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'}
-        </button>
-        <form className="flex flex-col sm:flex-row justify-between gap-5">
+
+        <form className="flex flex-col sm:flex-row text-base justify-between gap-5">
           <div className="report w-full">
             <label htmlFor="status">Status</label>
             <select
-              className="cursor-pointer w-full dark:bg-tremor-content-strong"
+              className="cursor-pointer text-sm w-full dark:bg-tremor-content-strong"
               id="status"
+              onChange={setStatusInsiden}
             >
-              <option className="bg-transparent" value="0">
+              <option className="bg-transparent cursor-pointer" value="0">
                 All
               </option>
-              <option className="bg-transparent" value="1">
+              <option className="bg-transparent cursor-pointer" value="1">
                 Baru
               </option>
-              <option className="bg-transparent" value="2">
+              <option className="bg-transparent cursor-pointer" value="2">
                 Proses
               </option>
-              <option className="bg-transparent" value="3">
+              <option className="bg-transparent cursor-pointer" value="3">
                 Selesai
               </option>
             </select>
@@ -89,7 +66,7 @@ export default function Report() {
           <div className="report w-full">
             <label htmlFor="Tipe Laporan">Tipe Laporan</label>
             <select
-              className="cursor-pointer w-full
+              className="cursor-pointer text-sm w-full
               dark:bg-tremor-content-strong
               "
               name="callType"
@@ -97,7 +74,9 @@ export default function Report() {
               onChange={(e) => setCallType(e.target.value)}
             >
               <option value="0">All</option>
-              <option value="1">Normal</option>
+              <option value="1" selected>
+                Normal
+              </option>
               <option value="2">Prank</option>
               <option value="3">Ghost</option>
               <option value="4">Informasi</option>
@@ -109,6 +88,7 @@ export default function Report() {
               range
               className="bg-inherit"
               value={values}
+              id={`input-disabled`}
               highlightToday={false}
               onChange={(dates) => {
                 if (dates.length === 2) {
@@ -135,7 +115,34 @@ export default function Report() {
             />
           </div>
         </form>
-        <ReportTable />
+        <div className="flex flex-col gap-2 mt-5 w-fit">
+          <label htmlFor="show">Jumlah Baris Ditampilkan</label>
+          <select
+            className="dark:bg-tremor-content-strong w-24 cursor-pointer"
+            onChange={setValueShow}
+            id="show"
+          >
+            <option
+              className="bg-transparent cursor-pointer "
+              value="10"
+              selected
+            >
+              10
+            </option>
+            <option className="bg-transparent cursor-pointer " value="25">
+              25
+            </option>
+            <option className="bg-transparent cursor-pointer " value="50">
+              50
+            </option>
+            <option className="bg-transparent cursor-pointer " value="100">
+              100
+            </option>
+          </select>
+        </div>
+        <div className="bg-blue-100 px-4 pb-10 mb-10 dark:bg-dark-tremor-content-inverted dark:bg-opacity-35 max-h-screen mt-5 pt-4  h-full overflow-scroll">
+          <ReportTable />
+        </div>
       </div>
     </>
   );
