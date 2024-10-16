@@ -150,7 +150,18 @@ export const getSummaryInsiden = async (dispatch) => {
     }
   } catch (error) {}
 };
-export const getDataInsiden = async (dispatch, showRow, callType, status) => {
+export const getDataInsiden = async (
+  dispatch,
+  showRow,
+  callType,
+  status,
+  dateStart,
+  dateEnd,
+  sort,
+) => {
+  const toLocaleStringStart = dateStart?.toLocaleString('id-ID');
+  const toLocaleStringEnd = dateEnd?.toLocaleString('id-ID');
+  console.log('toLocaleStringStart', toLocaleStringEnd);
   try {
     const response = await axios.get(
       `${import.meta.env.VITE_API}/get-insiden`,
@@ -159,6 +170,9 @@ export const getDataInsiden = async (dispatch, showRow, callType, status) => {
           call_type: callType, // Kirim data sebagai query parameters
           status,
           perPage: showRow,
+          dateStart: toLocaleStringStart,
+          dateEnd: toLocaleStringEnd,
+          sort,
         },
         withCredentials: true, // Sertakan opsi ini di konfigurasi yang sama
       },

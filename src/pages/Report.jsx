@@ -9,24 +9,37 @@ export default function Report() {
   const [callType, setCallType] = useState(1);
   const [status, setStatus] = useState(0);
   const [showRow, setShowRow] = useState(10);
+  const [urutkan, setUrutkan] = useState('desc');
+
   const dispatch = useDispatch();
   const today = new Date();
   today.setHours(0, 0, 0); // Atur jam ke 00:00 untuk tanggal awal
   const tomorrow = new Date();
+  const [values, setValues] = useState([today, tomorrow]);
   tomorrow.setDate(tomorrow.getDate() + 1);
   tomorrow.setHours(23, 59, 59); // Atur jam ke 23:59 untuk tanggal akhir
 
   useEffect(() => {
-    getDataInsiden(dispatch, showRow, callType, status);
-  }, [showRow, callType, status]);
-
-  const [values, setValues] = useState([today, tomorrow]);
+    getDataInsiden(
+      dispatch,
+      showRow,
+      callType,
+      status,
+      values[0],
+      values[1],
+      urutkan,
+    );
+  }, [showRow, callType, status, values[1], urutkan]);
 
   const setValueShow = (e) => {
     setShowRow(e.target.value);
   };
   const setStatusInsiden = (e) => {
     setStatus(e.target.value);
+  };
+
+  const setUrutkanInsiden = (e) => {
+    setUrutkan(e.target.value);
   };
 
   useEffect(() => {
@@ -86,7 +99,6 @@ export default function Report() {
             <label htmlFor="tanggal">Tanggal</label>
             <DatePicker
               range
-              className="bg-inherit"
               value={values}
               id={`input-disabled`}
               highlightToday={false}
@@ -110,37 +122,63 @@ export default function Report() {
               calendarPosition="bottom"
               fixMainPosition="true"
               numberOfMonths={2}
+              maxDate={today}
               format="DD/MM/YYYY HH:mm" // Format dengan jam
               showTimePicker={false} // Tidak perlu time picker, karena waktu diatur otomatis
             />
           </div>
         </form>
-        <div className="flex flex-col gap-2 mt-5 w-fit">
-          <label htmlFor="show">Jumlah Baris Ditampilkan</label>
-          <select
-            className="dark:bg-tremor-content-strong w-24 cursor-pointer"
-            onChange={setValueShow}
-            id="show"
-          >
-            <option
-              className="bg-transparent cursor-pointer "
-              value="10"
-              selected
+        <div className="flex gap-x-5 items-center">
+          <div className="flex flex-col gap-2 mt-5 w-fit">
+            <label htmlFor="show">Tampilkan</label>
+            <select
+              className="dark:bg-tremor-content-strong w-24 text-sm cursor-pointer"
+              onChange={setValueShow}
+              id="show"
             >
-              10
-            </option>
-            <option className="bg-transparent cursor-pointer " value="25">
-              25
-            </option>
-            <option className="bg-transparent cursor-pointer " value="50">
-              50
-            </option>
-            <option className="bg-transparent cursor-pointer " value="100">
-              100
-            </option>
-          </select>
+              <option
+                className="bg-transparent cursor-pointer "
+                value="10"
+                selected
+              >
+                10
+              </option>
+              <option className="bg-transparent cursor-pointer " value="25">
+                25
+              </option>
+              <option className="bg-transparent cursor-pointer " value="50">
+                50
+              </option>
+              <option className="bg-transparent cursor-pointer " value="100">
+                100
+              </option>
+            </select>
+          </div>
+          <div className="flex flex-col gap-2 mt-5 w-fit">
+            <label htmlFor="show">Urutkan</label>
+            <select
+              className="dark:bg-tremor-content-strong w-max text-sm cursor-pointer"
+              onChange={setUrutkanInsiden}
+              id="urutkan"
+            >
+              <option
+                className="bg-transparent cursor-pointer "
+                value="desc"
+                selected
+              >
+                Terbaru
+              </option>
+              <option
+                className="bg-transparent cursor-pointer "
+                value="asc"
+                selected
+              >
+                Terlama
+              </option>
+            </select>
+          </div>
         </div>
-        <div className="bg-blue-100 px-4 pb-10 mb-10 dark:bg-dark-tremor-content-inverted dark:bg-opacity-35 max-h-screen mt-5 pt-4  h-full overflow-scroll">
+        <div className="bg-gray-50 border-tremor-content border px-4 pb-10 mb-10 dark:bg-dark-tremor-content-inverted dark:bg-opacity-35 max-h-screen mt-5 pt-4  h-full overflow-scroll">
           <ReportTable />
         </div>
       </div>

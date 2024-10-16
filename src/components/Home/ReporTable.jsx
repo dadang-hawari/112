@@ -11,20 +11,18 @@ export const ReportTable = () => {
           <th className="border border-tremor-content px-2 text-center py-2">
             No.
           </th>
-          <th className="border border-tremor-content px-4 py-2">Ticket</th>
-          <th className="border border-tremor-content px-4 py-2">Category</th>
+          <th className="border border-tremor-content px-4 py-2">Tiket</th>
+          <th className="border border-tremor-content px-4 py-2">Kategori</th>
           <th className="border border-tremor-content px-4 py-2">
             Tipe Laporan
           </th>
           <th className="border border-tremor-content px-4 py-2">
             Description
           </th>
-          <th className="border border-tremor-content px-4 py-2">Location</th>
-          <th className="border border-tremor-content px-4 py-2">District</th>
-          <th className="border border-tremor-content px-4 py-2">
-            Subdistrict
-          </th>
-          <th className="border border-tremor-content px-4 py-2">Created At</th>
+          <th className="border border-tremor-content px-4 py-2">Lokasi</th>
+          <th className="border border-tremor-content px-4 py-2">Kecamatan</th>
+          <th className="border border-tremor-content px-4 py-2">Kelurahan</th>
+          <th className="border border-tremor-content px-4 py-2">Dibuat</th>
           <th className="border border-tremor-content px-4 py-2">Status</th>
         </tr>
       </thead>
@@ -45,24 +43,36 @@ export const ReportTable = () => {
             index,
           ) => (
             <tr key={index}>
-              <td className="text-center border border-tremor-content">
+              <td className="text-center border sm:py-2 border-tremor-content">
                 {index + 1}
               </td>
-              <td className="border border-tremor-content px-4">{ticket}</td>
-              <td className="border border-tremor-content px-4">{category}</td>
-              <td className="border border-tremor-content px-4">{call_type}</td>
-              <td className="border border-tremor-content px-4">
+              <td className="border sm:py-2 border-tremor-content px-2">
+                {ticket}
+              </td>
+              <td className="border sm:py-2 border-tremor-content px-2">
+                {category}
+              </td>
+              <td className="border sm:py-2 border-tremor-content px-2">
+                {call_type}
+              </td>
+              <td className="border sm:py-2 border-tremor-content px-2">
                 {description}
               </td>
-              <td className="border border-tremor-content px-4">{location}</td>
-              <td className="border border-tremor-content px-4">{district}</td>
-              <td className="border border-tremor-content px-4">
+              <td className="border sm:py-2 border-tremor-content px-2">
+                {location}
+              </td>
+              <td className="border sm:py-2 border-tremor-content px-2">
+                {district}
+              </td>
+              <td className="border sm:py-2 border-tremor-content px-2">
                 {subdistrict}
               </td>
-              <td className="border border-tremor-content px-4">
+              <td className="border sm:py-2 border-tremor-content px-2">
                 {created_at}
               </td>
-              <td className="border border-tremor-content px-4">{status}</td>
+              <td className="border sm:py-2 border-tremor-content px-2">
+                {status}
+              </td>
             </tr>
           ),
         )}
