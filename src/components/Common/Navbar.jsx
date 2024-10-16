@@ -76,15 +76,13 @@ export default function Navbar() {
         </div>
 
         <button
-          className={`text-xl ${
-            path === '/' ? 'text-tremor-content' : 'text-gray-800'
-          }  opacity-60 font-bold sm:hidden z-50`}
+          className={`text-xl text-tremor-content font-bold sm:hidden z-50`}
           onClick={() => setShowMenu(!showMenu)}
         >
           {showMenu ? 'X' : '☰'}
         </button>
         <ul
-          className={`gap-5 ${
+          className={`gap-5 text-gray-800 dark:text-tremor-content ${
             showMenu &&
             'flex flex-col sm:block bg-black pt-32 bg-opacity-50 opacity-100 w-full h-screen px-5 py-5 rounded-m '
           } sm:flex absolute ${
