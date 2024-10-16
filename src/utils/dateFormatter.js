@@ -16,5 +16,23 @@ export const dateFormatter = (dateTime) => {
   const seconds = String(date.getSeconds()).padStart(2, '0'); // Mengambil detik
 
   // Mengembalikan format dengan nama hari
-  return `${dayName}, ${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
+  return `${dayName}, ${day}/${month}/${year} ${hours}:${minutes}`;
+};
+
+export const getMonth = () => {
+  const months = [
+    'Januari',
+    'Februari',
+    'Maret',
+    'April',
+    ' Mei',
+    'Juni',
+    'Juli',
+    'Agustus',
+    'September',
+    'Oktober',
+    ' November',
+    'Desember',
+  ];
+  return `${months[new Date().getMonth()]} ${new Date().getFullYear()}`;
 };

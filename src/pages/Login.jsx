@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
@@ -18,6 +18,19 @@ function App() {
   const [usernameFocus, setUsernameFocus] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  // State untuk theme
+  const [theme, setTheme] = useState(
+    localStorage.getItem('theme') === 'dark' ? 'dark' : 'light',
+  );
+
+  // Mengubah class pada elemen root berdasarkan state theme
+  useEffect(() => {
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [theme]);
   const handleSubmit = async (e) => {
     e.preventDefault();
     const _token = import.meta.env.VITE_DOMAIN_TOKEN;

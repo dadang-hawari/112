@@ -2,7 +2,7 @@ import { AreaChart, Card } from '@tremor/react';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getDataMonth } from '../../services/dataService';
-import { dateFormatter } from '../../utils/dateFormatter';
+import { dateFormatter, getMonth } from '../../utils/dateFormatter';
 import { LoadingSpinner } from '../Common/LoadingSpinner';
 
 export const ChartArea = () => {
@@ -24,7 +24,7 @@ export const ChartArea = () => {
         >
           <div className="w-full flex justify-between">
             <h2 className="flex font-semibold w-full justify-between gap-x-5 text-tremor-default text-tremor-content dark:text-dark-tremor-content">
-              {`Distribusi Laporan Perbulan ${dateFormatter(Date.now())}`}
+              {`Distribusi Laporan Perbulan ${getMonth()}`}
             </h2>
             <div className="text-right w-full text-tremor-content text-sm">
               <p className="font-bold">Data terakhir diupdate tanggal</p>
