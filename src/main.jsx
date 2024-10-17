@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './styles/index.css';
 import './styles/main.css';
+import 'leaflet/dist/leaflet.css';
 import './styles/toast.css';
 import './styles/calendar.css';
 import './styles/scrollbar.css';

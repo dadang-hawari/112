@@ -60,7 +60,7 @@ export default function Navbar() {
 
   return (
     <header
-      className={`bg-transparent fixed z-50 ${
+      className={`bg-transparent fixed z-[9999999999] ${
         showMenu ? 'h-full backdrop-blur-sm shadow-md' : ''
       }  dark:text-white text-tremor-content transition-all duration-300 w-full ${
         scrollValue > 50 && 'backdrop-blur-sm shadow-md'
@@ -107,6 +107,18 @@ export default function Navbar() {
               }`}
             >
               Report
+            </Link>
+          </li>
+          <li className="">
+            <Link
+              to="/maps"
+              className={`${
+                path !== '/' && ' font-bold'
+              } transition-opacity duration-400   ${
+                path === '/maps' ? 'opacity-100' : 'opacity-60'
+              }`}
+            >
+              Maps
             </Link>
           </li>
           <li className="">
