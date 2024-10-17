@@ -9,3 +9,21 @@ body {
 div.report label {
   @apply mb-2 block;
 }
+.custom-marker {
+  border-radius: 50%; /* Membuat marker berbentuk lingkaran */
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  border: 2px solid white; /* Border putih untuk kontras */
+}
+
+div.leaflet-popup-content-wrapper,
+div.leaflet-popup-tip {
+  @apply dark:bg-tremor-content-strong text-tremor-content;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}

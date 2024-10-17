@@ -3,8 +3,10 @@ import ReactDOM from 'react-dom/client';
 import './styles/index.css';
 import './styles/main.css';
 import 'leaflet/dist/leaflet.css';
+import 'react-leaflet-markercluster/dist/styles.min.css';
 import './styles/toast.css';
 import './styles/calendar.css';
+
 import './styles/scrollbar.css';
 import Route from './Routes.jsx';
 import { Provider } from 'react-redux';
