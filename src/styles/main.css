@@ -10,14 +10,17 @@ div.report label {
   @apply mb-2 block;
 }
 .custom-marker {
+  @apply bg-[#22C55E] bg-opacity-50;
   border-radius: 50%; /* Membuat marker berbentuk lingkaran */
   width: 100px;
   height: 100px;
   display: flex;
   justify-content: center;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+
   align-items: center;
   color: white;
-  font-weight: bold;
+  font-weight: 500;
   font-size: 14px;
   border: 2px solid white; /* Border putih untuk kontras */
 }
@@ -26,4 +29,8 @@ div.leaflet-popup-content-wrapper,
 div.leaflet-popup-tip {
   @apply dark:bg-tremor-content-strong text-tremor-content;
   font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+div.leaflet-control-zoom.leaflet-bar.leaflet-control {
+  @apply mt-16 ml-4;
 }
