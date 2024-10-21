@@ -4,11 +4,17 @@ import Navbar from '../components/Common/Navbar';
 import DatePicker from 'react-multi-date-picker';
 import { getData, getDataInsiden } from '../services/dataService';
 import { ReportTable } from '../components/Home/ReporTable';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faChevronLeft,
+  faChevronRight,
+} from '@fortawesome/free-solid-svg-icons';
 const isiData = [{ data_1: 'ok' }];
 export default function Report() {
   const [callType, setCallType] = useState(1);
   const [status, setStatus] = useState(0);
   const [showRow, setShowRow] = useState(10);
+  const [page, setPage] = useState(1);
   const [urutkan, setUrutkan] = useState('desc');
 
   const dispatch = useDispatch();
@@ -18,7 +24,8 @@ export default function Report() {
   const [values, setValues] = useState([today, tomorrow]);
   tomorrow.setDate(tomorrow.getDate() + 1);
   tomorrow.setHours(23, 59, 59); // Atur jam ke 23:59 untuk tanggal akhir
-
+  const data = useSelector((state) => state?.data_report);
+  const lastPage = data?.last_page;
   useEffect(() => {
     getDataInsiden(
       dispatch,
@@ -28,8 +35,9 @@ export default function Report() {
       values[0],
       values[1],
       urutkan,
+      page,
     );
-  }, [showRow, callType, status, values[1], urutkan]);
+  }, [showRow, callType, status, values[1], urutkan, page]);
 
   const setValueShow = (e) => {
     setShowRow(e.target.value);
@@ -40,6 +48,11 @@ export default function Report() {
 
   const setUrutkanInsiden = (e) => {
     setUrutkan(e.target.value);
+  };
+
+  const setPageInsiden = (e) => {
+    if (e === inc) page === 1 ? '' : setPage(page - 1);
+    else lastPage === page ? '' : setPage(page + 1);
   };
 
   useEffect(() => {
@@ -177,9 +190,28 @@ export default function Report() {
               </option>
             </select>
           </div>
+          <div className="flex">
+            <button
+              className="w-7 max-w-7 
+            active:text-tremor-content-emphasis transition-colors duration-500
+            "
+              onClick={() => setPageInsiden('inc')}
+            >
+              <FontAwesomeIcon icon={faChevronLeft} />
+            </button>
+            <p className="w-5 text-center">{page}</p>
+            <button
+              className="w-7 max-w-7
+            active:text-tremor-content-emphasis transition-colors duration-500
+            "
+              onClick={() => setPageInsiden('dec')}
+            >
+              <FontAwesomeIcon icon={faChevronRight} />
+            </button>
+          </div>
         </div>
         <div className="bg-gray-50 border-tremor-content border px-4 pb-10 mb-10 dark:bg-dark-tremor-content-inverted dark:bg-opacity-35 max-h-screen mt-5 pt-4  h-full overflow-scroll">
-          <ReportTable />
+          <ReportTable page={page} />
         </div>
       </div>
     </>

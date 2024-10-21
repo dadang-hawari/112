@@ -1,9 +1,10 @@
 import { useSelector } from 'react-redux';
 
 export const ReportTable = () => {
-  const dataInsiden = useSelector(
-    (state) => state?.data_report?.data_insiden?.data,
-  );
+  const data = useSelector((state) => state?.data_report);
+  const lastPage = data?.last_page;
+  const dataInsiden = data?.data_insiden?.data;
+
   return (
     <table className="border border-tremor-content mt-2 max-h-4 text-[10px] h-full w-full">
       <thead>

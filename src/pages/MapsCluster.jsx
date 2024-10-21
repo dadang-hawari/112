@@ -1,26 +1,88 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css'; // Tambahkan CSS Leaflet
 import Navbar from '../components/Common/Navbar';
+import { OpenStreetMapProvider } from 'leaflet-geosearch';
 
-// Data kecamatan beserta jumlah datanya
 const kecamatanData = [
   {
-    name: 'Kecamatan Balla Parang',
+    name: 'Bontoala',
     dataCount: 50,
-    coords: [-5.136581415858494, 119.40799190279614], // Koordinat Balla Parang
+    coords: [-5.1262185, 119.423829], // Koordinat Balla Parang
   },
   {
-    name: 'Kecamatan Tes',
-    dataCount: 20,
-    coords: [-5.13710780930529, 119.40854173003456], // Koordinat Balla Parang
+    name: 'Tallo',
+    dataCount: 500,
+    coords: [-5.1153305, 119.450407], // Koordinat Balla Parang
   },
-
-  // Tambahkan kecamatan lain sesuai kebutuhan
+  {
+    name: 'Kepulauan Sangkarrang',
+    dataCount: 20,
+    coords: [-5.0478329, 119.3280641], // Koordinat Balla Parang
+  },
+  {
+    name: 'Balla Parang',
+    dataCount: 30,
+    coords: [-5.149753, 119.4330675],
+  },
+  {
+    name: 'Makassar',
+    dataCount: 390,
+    coords: [-5.1436275, 119.4263765],
+  },
+  {
+    name: 'Mamajang',
+    dataCount: 390,
+    coords: [-5.1689536, 119.4089434],
+  },
+  {
+    name: 'Manggala',
+    dataCount: 390,
+    coords: [-5.1660066, 119.4630844],
+  },
+  {
+    name: 'Mariso',
+    dataCount: 390,
+    coords: [-5.1621544, 119.3880967],
+  },
+  {
+    name: 'Panakkukang',
+    dataCount: 390,
+    coords: [-5.1442474, 119.4502041],
+  },
+  {
+    name: 'Rappoccini',
+    dataCount: 390,
+    coords: [-5.1698505, 119.4429925],
+  },
+  {
+    name: 'Tamalanrea',
+    dataCount: 390,
+    coords: [-5.1116335, 119.480652],
+  },
+  {
+    name: 'Tamalate',
+    dataCount: 390,
+    coords: [-5.193684, 119.410486],
+  },
+  {
+    name: 'Ujung Pandang',
+    dataCount: 390,
+    coords: [-5.1356407, 119.414141],
+  },
+  {
+    name: 'Ujung Tanah',
+    dataCount: 390,
+    coords: [-5.1138984, 119.4121011],
+  },
+  {
+    name: 'Wajo',
+    dataCount: 390,
+    coords: [-5.1239494, 119.3966953],
+  },
 ];
 
-// Fungsi untuk menghasilkan warna acak (random)
 const getRandomColor = () => {
   const letters = '0123456789ABCDEF';
   let color = '#';
@@ -30,19 +92,54 @@ const getRandomColor = () => {
   return color;
 };
 
-// Fungsi untuk membuat custom icon berdasarkan jumlah data
 const createCustomIcon = (dataCount) => {
   const randomColor = getRandomColor(); // Dapatkan warna acak
+  console.log('randomColor', randomColor);
   return L.divIcon({
-    html: `<div class="custom-marker" style="background: ${randomColor}">
+    html: `<div class="custom-marker bg-${dataCount < 50 ? 'blue' : 'red'}" >
              <span>${dataCount}</span>
            </div>`,
     className: 'custom-marker-icon',
-    iconSize: [100, 100], // Ukuran ikon
-    iconAnchor: [50, 100], // Titik anchor ikon
+    iconSize: [50, 50], // Ukuran ikon
+    iconAnchor: [-40, 40], // Titik anchor ikon
   });
 };
+
+const kecamatanList = ['Balla Parang', 'Bara-Baraya', 'South Sulawesi'];
+
+const searchKecamatan = async (kecamatanList) => {
+  const provider = new OpenStreetMapProvider();
+
+  for (const kecamatan of kecamatanList) {
+    try {
+      const result = await provider.search({ query: kecamatan });
+      if (result.length > 0) {
+        console.log(`Results for ${kecamatan}:`, result[0].raw);
+      } else {
+        console.log(`No results for ${kecamatan}`);
+      }
+      // Add a delay to respect rate limits
+      await new Promise((resolve) => setTimeout(resolve, 1000)); // 1-second delay
+    } catch (error) {
+      console.error(`Error fetching data for ${kecamatan}:`, error);
+    }
+  }
+};
+
 function MapsCluster() {
+  const [latLong, setLatLong] = useState('');
+  const provider = new OpenStreetMapProvider();
+  const dataProvide = async () => {
+    const result = await provider.search({ query: 'Bara-Baraya' });
+    setLatLong(result[0].raw);
+    console.log('result result[0].raw', result[0].raw);
+  };
+
+  useEffect(() => {
+    dataProvide();
+    // searchKecamatan(kecamatanBList);
+  }, []);
+
   return (
     <>
       <Navbar />

@@ -60,7 +60,7 @@ export default function Navbar() {
 
   return (
     <header
-      className={`bg-transparent fixed z-[99999999] ${
+      className={`bg-transparent fixed z-[999] ${
         showMenu ? 'h-full backdrop-blur-sm shadow-md' : ''
       }  dark:text-white text-tremor-content transition-all duration-300 w-full ${
         scrollValue > 50 && 'backdrop-blur-sm shadow-md'
@@ -121,11 +121,13 @@ export default function Navbar() {
               Maps
             </Link>
           </li>
-          <li className="">
-            <button className="px-5 " onClick={toggleTheme}>
-              {theme === 'dark' ? <IconSun /> : <IconMoon />}
-            </button>
-          </li>
+          {path !== '/maps' && (
+            <li className="">
+              <button className="px-5 " onClick={toggleTheme}>
+                {theme === 'dark' ? <IconSun /> : <IconMoon />}
+              </button>
+            </li>
+          )}
         </ul>
       </nav>
     </header>

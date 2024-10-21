@@ -158,6 +158,7 @@ export const getDataInsiden = async (
   dateStart,
   dateEnd,
   sort,
+  page,
 ) => {
   const toLocaleStringStart = dateStart?.toLocaleString('id-ID');
   const toLocaleStringEnd = dateEnd?.toLocaleString('id-ID');
@@ -173,6 +174,7 @@ export const getDataInsiden = async (
           dateStart: toLocaleStringStart,
           dateEnd: toLocaleStringEnd,
           sort,
+          page,
         },
         withCredentials: true, // Sertakan opsi ini di konfigurasi yang sama
       },
@@ -181,6 +183,7 @@ export const getDataInsiden = async (
     if (response.data.message !== 'Unauthenticated.') {
       dispatch(setDataInsiden(response?.data));
       console.log('response.data', response.data);
+      dispatch(setLastPage(response?.data?.last_page));
     } else {
       toast.dismiss('toastWait');
       toast(response.data.message, {
