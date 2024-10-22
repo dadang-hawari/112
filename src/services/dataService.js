@@ -2,6 +2,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import {
   setData,
+  setDataCountInsiden,
   setDataInsiden,
   setDataMonth,
   setDataToday,
@@ -18,12 +19,9 @@ export const getData = async (dispatch) => {
     toast.loading('Mohon tunggu...', {
       toastId: 'toastWait',
     });
-    const response = await axios.get(
-      `${import.meta.env.VITE_API}/get-insiden-v2`,
-      {
-        withCredentials: true,
-      },
-    );
+    const response = await axios.get(`${import.meta.env.VITE_API}/insiden-v2`, {
+      withCredentials: true,
+    });
     if (response.data.message !== 'Unauthenticated.') {
       dispatch(setData(response?.data?.data));
       dispatch(setTotal(response?.data?.total));
@@ -54,7 +52,7 @@ export const getData = async (dispatch) => {
 export const getTopCategories = async (dispatch) => {
   try {
     const response = await axios.get(
-      `${import.meta.env.VITE_API}/get-top-categories`,
+      `${import.meta.env.VITE_API}/top-categories`,
       {
         withCredentials: true,
       },
@@ -73,12 +71,9 @@ export const getTopCategories = async (dispatch) => {
 };
 export const getTopArea = async (dispatch) => {
   try {
-    const response = await axios.get(
-      `${import.meta.env.VITE_API}/get-top-area`,
-      {
-        withCredentials: true,
-      },
-    );
+    const response = await axios.get(`${import.meta.env.VITE_API}/top-area`, {
+      withCredentials: true,
+    });
     console.log('response', response);
     if (response.data.message !== 'Unauthenticated.') {
       dispatch(setTopArea(response?.data?.data));
@@ -94,7 +89,7 @@ export const getTopArea = async (dispatch) => {
 export const getDataToday = async (dispatch) => {
   try {
     const response = await axios.get(
-      `${import.meta.env.VITE_API}/get-insiden-v2-today`,
+      `${import.meta.env.VITE_API}/insiden-v2-today`,
       {
         withCredentials: true,
       },
@@ -111,10 +106,32 @@ export const getDataToday = async (dispatch) => {
     }
   } catch (error) {}
 };
+export const getInsidenCountDistrict = async (dispatch) => {
+  try {
+    const response = await axios.get(
+      `${import.meta.env.VITE_API}/insiden-count-district`,
+      {
+        withCredentials: true,
+      },
+    );
+
+    if (response.data.message !== 'Unauthenticated.') {
+      dispatch(setDataCountInsiden(response?.data));
+    } else {
+      toast.dismiss('toastWait');
+      toast(response.data.message, {
+        toastId: 'toastError',
+        className: 'toast-error',
+      });
+    }
+  } catch (error) {
+    console.log('error', error);
+  }
+};
 export const getSummaryCall = async (dispatch) => {
   try {
     const response = await axios.get(
-      `${import.meta.env.VITE_API}/get-summary-call`,
+      `${import.meta.env.VITE_API}/summary-call`,
       {
         withCredentials: true,
       },
@@ -134,7 +151,7 @@ export const getSummaryCall = async (dispatch) => {
 export const getSummaryInsiden = async (dispatch) => {
   try {
     const response = await axios.get(
-      `${import.meta.env.VITE_API}/get-summary-insiden`,
+      `${import.meta.env.VITE_API}/summary-insiden`,
       {
         withCredentials: true,
       },
@@ -164,21 +181,18 @@ export const getDataInsiden = async (
   const toLocaleStringEnd = dateEnd?.toLocaleString('id-ID');
   console.log('toLocaleStringStart', toLocaleStringEnd);
   try {
-    const response = await axios.get(
-      `${import.meta.env.VITE_API}/get-insiden`,
-      {
-        params: {
-          call_type: callType, // Kirim data sebagai query parameters
-          status,
-          perPage: showRow,
-          dateStart: toLocaleStringStart,
-          dateEnd: toLocaleStringEnd,
-          sort,
-          page,
-        },
-        withCredentials: true, // Sertakan opsi ini di konfigurasi yang sama
+    const response = await axios.get(`${import.meta.env.VITE_API}/insiden`, {
+      params: {
+        call_type: callType, // Kirim data sebagai query parameters
+        status,
+        perPage: showRow,
+        dateStart: toLocaleStringStart,
+        dateEnd: toLocaleStringEnd,
+        sort,
+        page,
       },
-    );
+      withCredentials: true, // Sertakan opsi ini di konfigurasi yang sama
+    });
 
     if (response.data.message !== 'Unauthenticated.') {
       dispatch(setDataInsiden(response?.data));
@@ -199,7 +213,7 @@ export const getDataInsiden = async (
 export const getDataMonth = async (dispatch) => {
   try {
     const response = await axios.get(
-      `${import.meta.env.VITE_API}/get-insiden-v2-month`,
+      `${import.meta.env.VITE_API}/insiden-v2-month`,
       {
         withCredentials: true,
       },

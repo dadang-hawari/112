@@ -1,88 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import L from 'leaflet';
+import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
+import L, { marker } from 'leaflet';
 import 'leaflet/dist/leaflet.css'; // Tambahkan CSS Leaflet
 import Navbar from '../components/Common/Navbar';
 import { OpenStreetMapProvider } from 'leaflet-geosearch';
-
-const kecamatanData = [
-  {
-    name: 'Bontoala',
-    dataCount: 50,
-    coords: [-5.1262185, 119.423829], // Koordinat Balla Parang
-  },
-  {
-    name: 'Tallo',
-    dataCount: 500,
-    coords: [-5.1153305, 119.450407], // Koordinat Balla Parang
-  },
-  {
-    name: 'Kepulauan Sangkarrang',
-    dataCount: 20,
-    coords: [-5.0478329, 119.3280641], // Koordinat Balla Parang
-  },
-  {
-    name: 'Balla Parang',
-    dataCount: 30,
-    coords: [-5.149753, 119.4330675],
-  },
-  {
-    name: 'Makassar',
-    dataCount: 390,
-    coords: [-5.1436275, 119.4263765],
-  },
-  {
-    name: 'Mamajang',
-    dataCount: 390,
-    coords: [-5.1689536, 119.4089434],
-  },
-  {
-    name: 'Manggala',
-    dataCount: 390,
-    coords: [-5.1660066, 119.4630844],
-  },
-  {
-    name: 'Mariso',
-    dataCount: 390,
-    coords: [-5.1621544, 119.3880967],
-  },
-  {
-    name: 'Panakkukang',
-    dataCount: 390,
-    coords: [-5.1442474, 119.4502041],
-  },
-  {
-    name: 'Rappoccini',
-    dataCount: 390,
-    coords: [-5.1698505, 119.4429925],
-  },
-  {
-    name: 'Tamalanrea',
-    dataCount: 390,
-    coords: [-5.1116335, 119.480652],
-  },
-  {
-    name: 'Tamalate',
-    dataCount: 390,
-    coords: [-5.193684, 119.410486],
-  },
-  {
-    name: 'Ujung Pandang',
-    dataCount: 390,
-    coords: [-5.1356407, 119.414141],
-  },
-  {
-    name: 'Ujung Tanah',
-    dataCount: 390,
-    coords: [-5.1138984, 119.4121011],
-  },
-  {
-    name: 'Wajo',
-    dataCount: 390,
-    coords: [-5.1239494, 119.3966953],
-  },
-];
-
+import MapCenterButton from '../components/Maps/MapCenterButton';
+import { useDispatch, useSelector } from 'react-redux';
+import { getInsidenCountDistrict } from '../services/dataService';
 const getRandomColor = () => {
   const letters = '0123456789ABCDEF';
   let color = '#';
@@ -92,59 +16,69 @@ const getRandomColor = () => {
   return color;
 };
 
+const getDataColor = (count) =>
+  count < 200
+    ? 'bg-cst-green'
+    : count < 500
+    ? 'bg-cst-blue'
+    : count < 800
+    ? 'bg-cst-yellow'
+    : count > 800 && 'bg-cst-red';
+
 const createCustomIcon = (dataCount) => {
   const randomColor = getRandomColor(); // Dapatkan warna acak
-  console.log('randomColor', randomColor);
+
   return L.divIcon({
-    html: `<div class="custom-marker bg-${dataCount < 50 ? 'blue' : 'red'}" >
+    html: `<div class="custom-marker ${getDataColor(dataCount)}" >
              <span>${dataCount}</span>
            </div>`,
     className: 'custom-marker-icon',
     iconSize: [50, 50], // Ukuran ikon
-    iconAnchor: [-40, 40], // Titik anchor ikon
+    iconAnchor: [50, 40],
+    popupAnchor: [0, -30],
   });
 };
 
-const kecamatanList = ['Balla Parang', 'Bara-Baraya', 'South Sulawesi'];
+const kecamatanList = [
+  'Bontoala',
+  'Tallo',
+  'Kepulauan Sangkarrang',
+  'Biring Kanaya',
+  'Makassar',
+  'Mamajang',
+  'Manggala',
+  'Mariso',
+  'Panakkukang',
+  'Rappocini',
+  'Ujung Pandang',
+  'Tamalanrea',
+  'Tamalate',
+  'Ujung Tanah',
+  'Wajo',
+];
 
-const searchKecamatan = async (kecamatanList) => {
-  const provider = new OpenStreetMapProvider();
-
-  for (const kecamatan of kecamatanList) {
-    try {
-      const result = await provider.search({ query: kecamatan });
-      if (result.length > 0) {
-        console.log(`Results for ${kecamatan}:`, result[0].raw);
-      } else {
-        console.log(`No results for ${kecamatan}`);
-      }
-      // Add a delay to respect rate limits
-      await new Promise((resolve) => setTimeout(resolve, 1000)); // 1-second delay
-    } catch (error) {
-      console.error(`Error fetching data for ${kecamatan}:`, error);
-    }
-  }
+const goToCenter = (lat, lng) => {
+  map.setView([lat, lng]); // Mengatur zoom level sesuai kebutuhan
 };
 
 function MapsCluster() {
   const [latLong, setLatLong] = useState('');
+  const kecamatanData = useSelector(
+    (state) => state?.data_report?.data_count_insiden,
+  );
+  const dispatch = useDispatch();
   const provider = new OpenStreetMapProvider();
-  const dataProvide = async () => {
-    const result = await provider.search({ query: 'Bara-Baraya' });
-    setLatLong(result[0].raw);
-    console.log('result result[0].raw', result[0].raw);
-  };
 
   useEffect(() => {
-    dataProvide();
-    // searchKecamatan(kecamatanBList);
+    getInsidenCountDistrict(dispatch);
+    console.log('kecamatanData', kecamatanData);
   }, []);
 
   return (
     <>
       <Navbar />
       <MapContainer
-        center={[-5.1671, 119.4341]}
+        center={[-5.1162181, 119.4104524]}
         zoom={13}
         style={{ height: '100vh', width: '100%' }}
       >
@@ -153,7 +87,7 @@ function MapsCluster() {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         />
 
-        {kecamatanData.map((kecamatan, index) => (
+        {kecamatanData?.map((kecamatan, index) => (
           <Marker
             key={index}
             position={kecamatan.coords}
@@ -161,13 +95,22 @@ function MapsCluster() {
           >
             <Popup>
               <div>
-                <h4>{kecamatan.name}</h4>
+                <h4 className="font-bold">{kecamatan.name}</h4>
                 <p>Jumlah Data: {kecamatan.dataCount}</p>
               </div>
             </Popup>
           </Marker>
         ))}
+        <MapCenterButton lat={-5.149753} lang={119.4330675} />
       </MapContainer>
+      <div className="fixed z-[9999] bg-white w-11/12 bottom-5 h-16 -translate-x-1/2 left-1/2 ">
+        <h2
+          className="font-semibold cursor-pointer"
+          onClick={() => goToCenter(-5.1138984, 119.4121011)}
+        >
+          Keterangan
+        </h2>
+      </div>
     </>
   );
 }
