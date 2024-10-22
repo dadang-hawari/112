@@ -11,6 +11,7 @@ const initialState = {
   summary_call: null,
   summary_insiden: null,
   data_insiden: null,
+  data_count_insiden: [],
 };
 
 const data = createSlice({
@@ -47,6 +48,9 @@ const data = createSlice({
     setDataInsiden: (state, action) => {
       state.data_insiden = action.payload;
     },
+    setDataCountInsiden: (state, action) => {
+      state.data_count_insiden = action.payload;
+    },
   },
 });
 
@@ -61,5 +65,6 @@ export const {
   setSummaryCall,
   setSummaryInsiden,
   setDataInsiden,
+  setDataCountInsiden,
 } = data.actions;
 export default data.reducer;
