@@ -12,7 +12,7 @@ export default function MapCenterButton({ lat, lang }) {
       className="fixed z-[99999] sans-jakarta bg-blue-500 text-white font-inherit w-fit px-5 py-2 bottom-2 left-10 cursor-pointer"
       onClick={goToCenter}
     >
-      <h2 className="text-sm">Kembali ke Center</h2>
+      <h2 className="text-sm">Kembali </h2>
     </div>
   );
 }
