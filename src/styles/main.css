@@ -10,7 +10,7 @@ div.report label {
   @apply mb-2 block;
 }
 .custom-marker {
-  @apply bg-opacity-50 h-28 w-28 rounded-full flex justify-center items-center text-white font-semibold border border-white;
+  @apply bg-opacity-50 h-28 w-28 rounded-full flex justify-center items-center text-white font-semibold border-2 border-white;
   font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
@@ -25,5 +25,5 @@ div.leaflet-popup-tip {
 }
 
 div.leaflet-control-zoom.leaflet-bar.leaflet-control {
-  @apply mt-16 ml-4;
+  @apply right-5 bottom-10 fixed;
 }
