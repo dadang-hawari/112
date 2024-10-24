@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export const MapsInfo = () => {
   return (
-    <div className="fixed z-[999] px-4 text-white bg-black bg-opacity-55 w-max rounded-sm -translate-y-1/2 top-1/2 h-[200px] left-4  ">
+    <div className="fixed z-[999] px-4 text-white bg-black bg-opacity-55 w-max rounded-sm pt-1 -translate-y-1/2 top-1/2 h-[200px] left-4  ">
       <div className="items-center gap-x-4">
         <h2 className="font-semibold cursor-pointer">Keterangan</h2>
         <section className="mt-2">

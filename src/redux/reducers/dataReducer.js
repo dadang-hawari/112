@@ -12,6 +12,7 @@ const initialState = {
   summary_insiden: null,
   data_insiden: null,
   data_count_insiden: [],
+  highest_report_coordinates: {},
 };
 
 const data = createSlice({
@@ -51,6 +52,9 @@ const data = createSlice({
     setDataCountInsiden: (state, action) => {
       state.data_count_insiden = action.payload;
     },
+    setHighestReportCordinates: (state, action) => {
+      state.highest_report_coordinates = action.payload;
+    },
   },
 });
 
@@ -66,5 +70,6 @@ export const {
   setSummaryInsiden,
   setDataInsiden,
   setDataCountInsiden,
+  setHighestReportCordinates,
 } = data.actions;
 export default data.reducer;

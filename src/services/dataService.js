@@ -6,6 +6,7 @@ import {
   setDataInsiden,
   setDataMonth,
   setDataToday,
+  setHighestReportCordinates,
   setLastPage,
   setSummaryCall,
   setSummaryInsiden,
@@ -13,6 +14,7 @@ import {
   setTopCategories,
   setTotal,
 } from '../redux/reducers/dataReducer';
+import { getHighestData } from '../utils/reportFormatter';
 
 export const getData = async (dispatch) => {
   try {
@@ -115,8 +117,10 @@ export const getInsidenCountDistrict = async (dispatch) => {
       },
     );
 
+    console.log('response.data district', response.data);
     if (response.data.message !== 'Unauthenticated.') {
       dispatch(setDataCountInsiden(response?.data));
+      dispatch(setHighestReportCordinates(getHighestData(response?.data)));
     } else {
       toast.dismiss('toastWait');
       toast(response.data.message, {

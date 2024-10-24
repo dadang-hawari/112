@@ -121,13 +121,11 @@ export default function Navbar() {
               Maps
             </Link>
           </li>
-          {path !== '/maps' && (
-            <li className="">
-              <button className="px-5 " onClick={toggleTheme}>
-                {theme === 'dark' ? <IconSun /> : <IconMoon />}
-              </button>
-            </li>
-          )}
+          <li className="">
+            <button className="px-5 " onClick={toggleTheme}>
+              {theme === 'dark' ? <IconSun /> : <IconMoon />}
+            </button>
+          </li>
         </ul>
       </nav>
     </header>
