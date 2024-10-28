@@ -6,12 +6,6 @@ import Navbar from '../components/Common/Navbar';
 import { OpenStreetMapProvider } from 'leaflet-geosearch';
 import MapCenterButton from '../components/Maps/MapCenterButton';
 import { useDispatch, useSelector } from 'react-redux';
-import { getInsidenCountDistrict } from '../services/dataService';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faChevronLeft,
-  faChevronRight,
-} from '@fortawesome/free-solid-svg-icons';
 import { MapsInfo } from '../components/Maps/MapsInfo';
 import MapHighestReport from '../components/Maps/MapHighestReport';
 const getRandomColor = () => {
@@ -145,6 +139,7 @@ function MapsCluster() {
         <MapCenterButton />
         <MapHighestReport />
       </MapContainer>
+
       <MapsInfo />
     </>
   );

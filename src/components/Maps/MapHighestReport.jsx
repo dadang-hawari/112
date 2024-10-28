@@ -9,6 +9,8 @@ import React, { useEffect, useState } from 'react';
 import { useMap } from 'react-leaflet';
 import { useDispatch, useSelector } from 'react-redux';
 import { getInsidenCountDistrict } from '../../services/dataService';
+import 'boxicons';
+import { BoxIconElement } from 'boxicons';
 
 export default function MapHighestReport() {
   const map = useMap();
@@ -30,7 +32,7 @@ export default function MapHighestReport() {
       .setContent(`<div>
                 <b>${coord?.name}</b>
                 <p>Jumlah Laporan: ${coord?.dataCount}</p>
-              </div>`); // Set konten popup
+              </div>`);
 
     // Buka popup di peta
     popup.openOn(map);
@@ -39,7 +41,7 @@ export default function MapHighestReport() {
     <button
       onClick={toHighestReport}
       disabled={isLoading}
-      className="fixed py-2 px-2 rounded-sm flex items-center gap-x-2 sans-jakarta text-white bottom-10 -translate-y-1/2 top-1/2 h-max right-3  z-[999999]  bg-blue-500 "
+      className="fixed py-2 px-2 rounded-sm flex items-center gap-x-2 sans-jakarta text-white bottom-10 -translate-y-1/2 top-1/2 h-max right-3  z-[999]  bg-blue-500 "
     >
       {isLoading ? (
         'Mohon tunggu..'
