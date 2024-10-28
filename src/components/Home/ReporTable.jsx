@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 export const ReportTable = () => {
   const data = useSelector((state) => state?.data_report);
   const lastPage = data?.last_page;
+  let startPage = data?.data_insiden?.from;
   const dataInsiden = data?.data_insiden?.data;
 
   return (
@@ -45,7 +46,7 @@ export const ReportTable = () => {
           ) => (
             <tr key={index}>
               <td className="text-center border sm:py-2 border-tremor-content">
-                {index + 1}
+                {startPage + 1 && startPage++}
               </td>
               <td className="border sm:py-2 border-tremor-content px-2">
                 {ticket}

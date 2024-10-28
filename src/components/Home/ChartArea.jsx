@@ -13,12 +13,12 @@ export const ChartArea = () => {
     getDataMonth(dispatch).then(() => setIsLoading(false));
   }, []);
   return (
-    <Card className="w-full max-w-7xl sm:h-[416px] mx-auto relative">
+    <Card className="w-full max-w-7xl overflow-x-scroll sm:h-[416px] mx-auto relative">
       {isLoading ? (
         <LoadingSpinner isLoading={isLoading} />
       ) : (
         <div
-          className={`w-full transition-opacity ${
+          className={`w-full min-w-[400px]  transition-opacity ${
             isLoading ? 'opacity-0' : 'opacity-100'
           }`}
         >
