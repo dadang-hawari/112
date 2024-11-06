@@ -13,7 +13,8 @@ export const ChartArea = () => {
     getDataMonth(dispatch).then(() => setIsLoading(false));
   }, []);
   return (
-    <Card className="w-full max-w-7xl overflow-x-scroll sm:h-[416px] mx-auto relative">
+    // max-w-7xl
+    <Card className="w-full  overflow-x-scroll sm:h-[416px] mx-auto relative">
       {isLoading ? (
         <LoadingSpinner isLoading={isLoading} />
       ) : (
