@@ -106,7 +106,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <div className="pl-[200px] pr-4 pt-24 h-screen w-full mx-auto">
+      <div className="px-4 pt-24 h-screen w-full mx-auto">
         <ChartArea />
         <div className="flex flex-col md:flex-row gap-4 w-full">
           <ChartProgressCircle />
